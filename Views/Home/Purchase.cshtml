@@ -1,0 +1,175 @@
+﻿@{
+    ViewBag.Title = "Purchase";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="~/js/PurchaseScripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+
+
+<h2>Purchase Requisition</h2>
+
+<fieldset id="fieldSetInputPurchase">
+    <div align="right">
+        <button type="button" class="btn btn-success btn-sm" id="add" data-toggle="modal" data-target="#popUpInputPurchase">
+            New Purchase
+        </button>
+    </div>
+    <table class="table table-hover" id="table_purchase_body">
+        <thead class="thead-dark">
+            <tr>
+                <th>No</th>
+                <th hidden>ID</th>
+                <th hidden>UserLoginID</th>
+                <th hidden>VendorID</th>
+                <th>Vendor Name</th>
+                <th>Request Date</th>
+                <th>Target Date</th>
+                <th hidden>Fulfillment Date</th>
+                <th hidden>Fulfillment Status</th>
+                <th hidden>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            <tr></tr>
+        </tbody>
+    </table>
+</fieldset>
+
+<div class="modal fade" id="popUpInputPurchase" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times</button>
+            </div>
+            <div class="modal-body">
+                <form action="" id="formPurchase" method="post">
+                    <input type="hidden" id="mode" value="insert" />
+                    <div class="form-group row">
+                        <div class="col-sm-4" hidden>
+                            <label>Purchase ID</label>
+                            <input type="text" class="form-control" id="ID" name="ID" placeholder="Purchase ID">
+                        </div>
+                        <div class="col-sm-4">
+                            <label>UserLogin ID</label>
+                            <input type="text" class="form-control" id="UserLoginID" name="UserLoginID" placeholder="UserLogin ID">
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Select Vendor</label>
+                            <select class="form-control" id="vendorsDropdown" name="vendorsDropdown"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-4">
+                            <label>Target Date</label>
+                            <div class="input-group date col-sm-3">
+                                <input type="date" class="form-control" id="TargetDate" name="TargetDate">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        @*<div class="col-sm-4" hidden>
+                            <label>Fulfillment Date</label>
+                            <div class="input-group date col-sm-3">
+                                <input type="date" class="form-control" id="FulfillmentDate" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>*@
+                    </div>
+                    @*<div class="form-group row">
+                        <div class="col-sm-4">
+                            <label>Fulfillment Status</label>
+                            <div class="input-group-addon">
+                                <label class="col-sm-5 radio-inline">
+                                    <input type="radio" name="options" id="optionOpen" autocomplete="off" checked> Open
+                                </label>
+                                <label class="col-sm-5 radio-inline">
+                                    <input type="radio" name="options" id="optionClosed" autocomplete="off"> Closed
+                                </label>
+                            </div>
+                        </div>
+                    </div>*@
+                    <div class="row">
+                        <div class="col"><hr></div>
+                        <div class="col-auto">Add Materials to Order</div>
+                        <div class="col"><hr></div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-4">
+                            <label>Select Material</label>
+                            <select class="form-control" id="materialsDropdown" name="materialsDropdown"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="col-sm-6">Price</label>
+                            <input type="number" class="form-control" id="Price" name="Price">
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="col-sm-4">Qty</label>
+                            <input type="number" class="form-control" id="Qty" name="Qty" >
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="col-sm-4">UOM</label>
+                            <input type="text" class="form-control" id="UnitOfMeasure" name="UnitOfMeasure" >
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="col-sm-4">Amount</label>
+                            <input type="number" class="form-control" id="Amount" name="Amount" >
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button type="button" id="addList"  class="btn btn-primary btn-md">Add</button>
+                            <button type="button" id="update" class="btn btn-success btn-md">Update</button>
+                        </div>
+                    </div>
+                </form>
+                <fieldset>
+                    <table class="table table-hover" id="table_listpurchase_body">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>No</th>
+                                <th>Material Name</th>
+                                <th>Price</th>
+                                <th>Qty</th>
+                                <th>UOM</th>
+                                <th>Amount</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tlistpurchasebody">
+                        </tbody>
+                    </table>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                         
+                            <button type="button" id="submit" class="btn btn-primary btn-md">Submit</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    
+
+
+
+@*<div class="form-group row">
+    <div class="col-sm-10">
+        <button type="button" id="clear" class="btn btn-warning btn-md">Clear</button>
+    </div>
+</div>*@

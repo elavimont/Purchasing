@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Vendor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="~/js/VendorScripts.js"></script>
+<script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<h2>Vendor</h2>
+
+<fieldset id="fieldSetInputVendor">
+    <div class="clearfix" align="right">
+        <button type="button" class="btn btn-success btn-sm" id="add" data-toggle="modal" data-target="#popUpInputNewVendor">
+            New Vendor
+        </button>
+    </div>
+    <table class="table table-hover" id="table_vendor_body">
+        <thead class="thead-dark">
+            <tr>
+                <th>No</th>
+                <th hidden>ID</th>
+                <th align="center">Vendor Name</th>
+                <th align="center">Phone</th>
+                <th align="center">Address</th>
+                <th hidden>Status</th>
+                <th align="center">Action</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            <tr></tr>
+        </tbody>
+    </table>
+</fieldset>
+<div class="modal fade" id="popUpInputNewVendor">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times</button>
+            </div>
+            <div class="modal-body">
+                <form action="" id="formVendor" method="post">
+                    <input type="hidden" id="mode" value="insert" />
+                    <div class="form-group row" hidden>
+                        <label class="col-sm-2 col-form-label">ID</label>
+                        <div class="col-sm-10">
+                            <div class="md-form mt-0">
+                                <input type="text" class="form-control" id="ID" name="ID" placeholder="Vendor ID">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Vendor Name</label>
+                        <div class="col-sm-10">
+                            <div class="md-form mt-0">
+                                <input type="text" class="form-control" id="VendorName" name="VendorName" placeholder="Vendor Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Phone</label>
+                        <div class="col-sm-10">
+                            <div class="md-form mt-0">
+                                <input type="text" class="form-control" id="Phone" name="Phone" placeholder="Phone">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Address</label>
+                        <div class="col-sm-10">
+                            <div class="md-form mt-0">
+                                <input type="text" class="form-control" id="Address" name="Address" placeholder="Address">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row" hidden>
+                        <label class="col-sm-2 col-form-label">Status</label>
+                        <div class="col-sm-10">
+                            <div class="md-form mt-0">
+                                <input type="text" class="form-control" id="Status" name="Status" placeholder="Status">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="submit" class="btn btn-success col-sm-2" data-dismiss="modal">Create</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
